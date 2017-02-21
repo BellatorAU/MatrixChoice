@@ -19,11 +19,25 @@ public class Matrix {
             this.n = n;
             this.m = m;
         }
+
+        public int getM() {
+            return m;
+        }
+
+        public int getN() {
+            return n;
+        }
     }
 
-    Matrix(){}
+    Matrix()
+    {
+        this.Dimension = new Dimension(0, 0);
+    }
 
-
+    private int multiply(Matrix m1, Matrix m2)
+    {
+        return m1.Dimension. ;
+    }
 
     public static void main(String[] args) throws IOException {
         Matrix matrix = new Matrix();
