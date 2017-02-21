@@ -4,50 +4,41 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.Vector;
 
-public class Matrix {
+public class MatrixChoice {
 
-    private static Vector<Dimension> matrixList;
+    private static Vector<Matrix> matrixList;
     private static int numberOfMatrix;
 
-    class Dimension
+    class Matrix
     {
         private int n;
         private int m;
 
-        Dimension(int n, int m)
+        Matrix(int n, int m)
         {
             this.n = n;
             this.m = m;
         }
 
-        public int getM() {
-            return m;
+        Matrix() {}
+
+        public int multiply(Matrix m1, Matrix m2)
+        {
+            return m1.n*m1.m*m2.m ;
         }
 
-        public int getN() {
-            return n;
-        }
-    }
-
-    Matrix()
-    {
-        this.Dimension = new Dimension(0, 0);
-    }
-
-    private int multiply(Matrix m1, Matrix m2)
-    {
-        return m1.Dimension. ;
+        
     }
 
     public static void main(String[] args) throws IOException {
-        Matrix matrix = new Matrix();
-        Matrix.matrixList = new Vector<>();
+        MatrixChoice main = new MatrixChoice();
+        MatrixChoice.matrixList = new Vector<>();
         Scanner sc = new Scanner(new File("input.txt"));
-        Matrix.numberOfMatrix = sc.nextInt();
+        MatrixChoice.numberOfMatrix = sc.nextInt();
         while (sc.hasNext()) {
             int n = sc.nextInt();
             int m = sc.nextInt();
-            matrixList.add(matrix.new Dimension(n, m));
+            MatrixChoice.matrixList.add(main.new Matrix(n, m));
         }
 
         File f = new File("output.txt");
