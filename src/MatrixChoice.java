@@ -6,44 +6,55 @@ import java.util.Vector;
 
 public class MatrixChoice {
 
-    private static Vector<Matrix> matrixList;
+    private static int[] matrixList;
     private static int numberOfMatrix;
+    private static int[][] values;
 
-    class Matrix
+    public int getNumberOfMatrix()
     {
-        private int n;
-        private int m;
-
-        Matrix(int n, int m)
-        {
-            this.n = n;
-            this.m = m;
-        }
-
-        Matrix() {}
-
-        public int multiply(Matrix m1, Matrix m2)
-        {
-            return m1.n*m1.m*m2.m ;
-        }
-
-        
+        return numberOfMatrix;
     }
 
     public static void main(String[] args) throws IOException {
         MatrixChoice main = new MatrixChoice();
-        MatrixChoice.matrixList = new Vector<>();
         Scanner sc = new Scanner(new File("input.txt"));
         MatrixChoice.numberOfMatrix = sc.nextInt();
+        MatrixChoice.matrixList = new int[numberOfMatrix+1];
+        int ind = 0;
         while (sc.hasNext()) {
             int n = sc.nextInt();
+            matrixList[ind] = n;
             int m = sc.nextInt();
-            MatrixChoice.matrixList.add(main.new Matrix(n, m));
+            matrixList[ind+1] = m;
+            ind++;
         }
-
+        MatrixChoice.values = new int[numberOfMatrix][numberOfMatrix];
+        for(int i = 0; i<numberOfMatrix; i++)
+        {
+            for(int j = i; j>=0; j--)
+            {
+                if(i==j)
+                    values[i][j] = 0;
+                else if(i == j+1)
+                {
+                    values[i][j] = matrixList[j] * matrixList[i] * matrixList[i+1];
+                }
+                else
+                {
+                    int min = matrixList[j]*matrixList[j+1]*matrixList[i+1] + values[i][j+1];
+                    for(int k =j+1; k<i; k++)
+                    {
+                        int temp = matrixList[j]*matrixList[k+1]*matrixList[i+1] + values[k][j] + values[i][k+1] ;
+                        if (temp < min)
+                            min = temp;
+                    }
+                    values[i][j] = min;
+                }
+            }
+        }
         File f = new File("output.txt");
         PrintWriter pw = new PrintWriter(f);
-        //pw.println(value);
+        pw.println(values[numberOfMatrix-1][0]);
         pw.close();
     }
 }
